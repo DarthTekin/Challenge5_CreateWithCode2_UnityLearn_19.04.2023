@@ -15,7 +15,7 @@ public class GameManagerX : MonoBehaviour
 
     public List<GameObject> targetPrefabs;
 
-    private float time = 60;
+    private float time = 10;
     private int score;
     private float spawnRate = 1.5f;
     public bool isGameActive;
@@ -31,6 +31,11 @@ public class GameManagerX : MonoBehaviour
            time -= Time.deltaTime;
         }
             UpdateTime(time);
+
+        if (time <= 0)
+        {
+            GameOver();
+        }
     }
 
     // Start the game, remove title screen, reset score, and adjust spawnRate based on difficulty button clicked
