@@ -8,6 +8,8 @@ public class TargetX : MonoBehaviour
     private GameManagerX gameManagerX;
     public int pointValue;
     public GameObject explosionFx;
+    private AudioSource targetAudio;
+    public AudioClip explosionSound;
 
     public float timeOnScreen = 1.0f;
 
@@ -19,6 +21,7 @@ public class TargetX : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        targetAudio = GetComponent<AudioSource>();
         gameManagerX = GameObject.Find("Game Manager").GetComponent<GameManagerX>();
 
         transform.position = RandomSpawnPosition(); 
@@ -71,6 +74,7 @@ public class TargetX : MonoBehaviour
     // Display explosion particle at object's position
     void Explode ()
     {
+        targetAudio.PlayOneShot(explosionSound, 1.0f);
         Instantiate(explosionFx, transform.position, explosionFx.transform.rotation);
     }
 

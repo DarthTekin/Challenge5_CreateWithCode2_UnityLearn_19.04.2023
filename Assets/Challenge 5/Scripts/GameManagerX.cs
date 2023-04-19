@@ -11,11 +11,13 @@ public class GameManagerX : MonoBehaviour
     public TextMeshProUGUI gameOverText;
     public TextMeshProUGUI countDownText;
     public GameObject titleScreen;
-    public Button restartButton; 
+    public Button restartButton;
+    public AudioClip gameOver;
+    private AudioSource gmAudio;
 
     public List<GameObject> targetPrefabs;
 
-    private float time = 10;
+    private float time = 60;
     private int score;
     private float spawnRate = 1.5f;
     public bool isGameActive;
@@ -23,6 +25,11 @@ public class GameManagerX : MonoBehaviour
     private float spaceBetweenSquares = 2.5f; 
     private float minValueX = -3.75f; //  x value of the center of the left-most square
     private float minValueY = -3.75f; //  y value of the center of the bottom-most square
+
+    private void Start()
+    {
+        gmAudio = GetComponent<AudioSource>();
+    }
 
     private void Update()
     {
@@ -95,6 +102,7 @@ public class GameManagerX : MonoBehaviour
     {
         gameOverText.gameObject.SetActive(true);
         restartButton.gameObject.SetActive(true);
+        gmAudio.PlayOneShot(gameOver, 1.0f);
         isGameActive = false;
     }
 
